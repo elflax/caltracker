@@ -19,7 +19,6 @@ class CreateMealsTable extends Migration
             $table->foreignId('meal_type_id')->constrained('meal_types');
             $table->date('date');
             $table->integer('how_much_ate')->nullable();
-            $table->primary(['user_id', 'food_id']);
             $table->timestamps();
         });
     }

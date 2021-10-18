@@ -18,7 +18,6 @@ class CreateRutinesTable extends Migration
             $table->foreignId('exercise_id')->constrained('exercises');
             $table->integer('how_much_play')->nullable();
             $table->date('date');
-            $table->primary(['user_id', 'exercise_id']);
             $table->timestamps();
         });
     }
