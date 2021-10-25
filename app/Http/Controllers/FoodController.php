@@ -1,19 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Food;
 
-use App\Http\Requests\StoreMealRequest;
-use App\Models\Meal;
 use Illuminate\Http\Request;
-use App\Models\MealType;
 
-class MealController extends Controller
+class FoodController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -21,9 +14,7 @@ class MealController extends Controller
      */
     public function index()
     {
-        return view('meal.index')
-                ->with('meal_types', MealType::all())
-                ->with('meals', Meal::getByDate(date('Y-m-d')));
+        //
     }
 
     /**
@@ -33,7 +24,7 @@ class MealController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -42,9 +33,9 @@ class MealController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMealRequest $request)
+    public function store(Request $request)
     {
-        return response()->json(Meal::create($request));
+        //
     }
 
     /**
@@ -55,7 +46,7 @@ class MealController extends Controller
      */
     public function show($id)
     {
-        //
+        return Food::getById($id);
     }
 
     /**
@@ -89,6 +80,6 @@ class MealController extends Controller
      */
     public function destroy($id)
     {
-        return response()->json(Meal::del($id));
+        //
     }
 }

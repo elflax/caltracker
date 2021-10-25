@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MealController;
+use App\Http\Controllers\FoodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,13 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::prefix('meal')->group(function () {
+Route::middleware('auth')->prefix('meal')->group(function () {
     Route::get('/', [MealController::class, 'index']);
+    Route::post('/', [MealController::class, 'store']);
+    Route::delete('/{id}', [MealController::class, 'destroy']);
 });
+
+
+Route::middleware('auth')->resource('food', FoodController::class)->names([
+    'get' => 'food.build'
+]);

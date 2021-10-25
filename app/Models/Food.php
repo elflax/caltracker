@@ -19,4 +19,11 @@ class Food extends Model
     public function meals(){
         return $this->hasMany(Meal::class);
     }
+
+    public static function getById($id){
+        //Cero return all registers
+        if($id)
+            return Food::find($id);
+        return Food::all();
+    }
 }
