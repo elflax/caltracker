@@ -22,6 +22,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::middleware('auth')->prefix('meal')->group(function () {
     Route::get('/', [MealController::class, 'index']);
     Route::post('/', [MealController::class, 'store']);
+    Route::put('/{id}', [MealController::class, 'update']);
     Route::delete('/{id}', [MealController::class, 'destroy']);
 });
 

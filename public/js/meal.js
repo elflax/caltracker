@@ -1,4 +1,4 @@
-function add_meal(meal_type){
+function add_meal(meal_type, meal_id = 0 ){
     $('#add-'+meal_type).attr('disabled', true);
     $.ajax({
         url: "http://127.0.0.1:8000/food/0",
@@ -13,7 +13,13 @@ function add_meal(meal_type){
                     "data-unit_of_measure='"+result[i].unit_of_measure+"' " +
                     "data-minimun_value='"+result[i].minimun_value+"'>"+result[i].name+"</option>";
             }
-            let html = "<tr>" +
+            var food, how_much_ate, calories;
+            if(meal_id){
+                food = parseInt($('#food_' + meal_id).attr('data-food_id'));
+                how_much_ate = parseInt($('#how_much_ate_' + meal_id).text());
+                calories = parseInt($('#calories_' + meal_id).text());
+            }
+            let html = ((meal_id)? "":"<tr>") +
                             "<td>" +
                                 "<select class='form-control' name='food_id' onchange='calculateCalories(\""+meal_type+"\")' id='select-"+meal_type+"'>"+select+"</select>" +
                             "</td>" +
@@ -23,13 +29,23 @@ function add_meal(meal_type){
                             "<td id='cal-"+meal_type+"'></td>" +
                             "<td>" +
                                 "<div class='btn-group' role='group' aria-label='Basic example'>" +
-                                    "<button type='button' onclick=\"submitMeal(this, '" + meal_type + "')\" class='btn btn-success'>Agregar</button>" +
+                                    "<button type='button' onclick=\"submitMeal(this, '" + meal_type + "', "+meal_id+")\" class='btn btn-success'>Agregar</button>" +
                                     "<button type='button' class='btn btn-danger'>Cancelar</button>" +
                                 "</div>" +
                             "</td>" +
-                        "</tr>";
-            $('#table-' + meal_type + ' tbody').append(html);
+                        ((meal_id)? "":"</tr>");
+            if(meal_id){
+                $('#meal_'+meal_id).html(html);
+            }else{
+                $('#table-' + meal_type + ' tbody').append(html);
+            }
             $('#add-'+meal_type).attr('disabled', true);
+            console.log(food);
+            if(meal_id){
+                $('#select-' + meal_type).val(food);
+                $('#input-' + meal_type).val(how_much_ate);
+                $('#cal-' + meal_type).text(calories);
+            }
         },
     });
 }
@@ -48,10 +64,17 @@ function calculateCalories(meal_type){
 
 }
 
-function submitMeal(elem, meal_type){
+function submitMeal(elem, meal_type, meal_id = 0){
+    if(meal_id){
+        var url = "http://127.0.0.1:8000/meal/" + meal_id;
+        var method = "PUT";
+    }else{
+        var url = "http://127.0.0.1:8000/meal/";
+        var method = "POST";
+    }
     $.ajax({
-        url: "http://127.0.0.1:8000/meal/",
-        type: "POST",
+        url: url,
+        type: method,
         dataType: "json",
         data: $('#form-'+meal_type).serialize(),
         async: false,
@@ -67,9 +90,17 @@ function submitMeal(elem, meal_type){
                                 result.calories +
                             "</td>" +
                             "<td>" +
-                                "<button type='button' class='btn btn-secondary'>Editar</button>" +
+                                "<div class='btn-group' role='group' aria-label='Basic example'>" +
+                                    "<button type='button' class='btn btn-secondary' onclick=\"add_meal('"+meal_type+"', "+meal_id+")\">Editar</button>" +
+                                    "<button type='button' class='btn btn-secondary' onclick='if(confirm(\"Desea eliminar esta comida?\")){ deleteMeal("+result.id+"); }'>Eliminar</button>" +
+                                "</div>" +
                             "</td>";
-            $(elem).parent().parent().parent().html(html);
+            if(meal_id){
+                $('#meal_' + meal_id).html(html);
+            }else{
+                $(elem).parent().parent().parent().html(html);
+            }
+            $('#add-' + meal_type).attr('disabled', false);
         },
         error: function (jqXHR, exception) {
             var msg = '';
@@ -89,13 +120,14 @@ function submitMeal(elem, meal_type){
                 msg = 'Uncaught Error.\n' + jqXHR.responseText;
             }
             alert(msg);
+            $('#add-' + meal_type).attr('disabled', false);
         },
     });
 }
 
-function deleteMeal(user_id, food_id, meal_type_id, date){
+function deleteMeal(meal_id){
     $.ajax({
-        url: "http://127.0.0.1:8000/meal/"+user_id+"_"+food_id+"_"+meal_type_id+"_"+date,
+        url: "http://127.0.0.1:8000/meal/"+meal_id,
         type: "DELETE",
         dataType: "json",
         data: {
@@ -104,8 +136,8 @@ function deleteMeal(user_id, food_id, meal_type_id, date){
         async: false,
         success: function(result){
             alert('Comida eliminada');
-            console.log(user_id+"_"+food_id+"_"+meal_type_id+"_"+date);
-            $('#meal_'+user_id+"_"+food_id+"_"+meal_type_id+"_"+date).remove();
+
+            $('#meal_'+meal_id).remove();
         },
         error: function (jqXHR, exception) {
             var msg = '';

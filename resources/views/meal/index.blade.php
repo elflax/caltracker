@@ -42,12 +42,15 @@
                                                 <tbody>
                                                 @foreach($meals as $meal)
                                                     @if($meal_type->id == $meal->meal_type_id)
-                                                    <tr id="meal_{{ $meal->user_id ."_". $meal->food_id ."_". $meal->meal_type_id ."_". $meal->date }}">
-                                                        <td>{{ $meal->food->name }}</td>
-                                                        <td>{{ $meal->how_much_ate }}</td>
-                                                        <td>{{ ($meal->how_much_ate * $meal->food->calories ) / $meal->food->minimun_value }}</td>
+                                                    <tr id="meal_{{ $meal->id }}">
+                                                        <td id="food_{{ $meal->id }}" data-food_id="{{ $meal->food->id }}">{{ $meal->food->name }}</td>
+                                                        <td id="how_much_ate_{{ $meal->id }}">{{ $meal->how_much_ate }}</td>
+                                                        <td id="calories_{{ $meal->id }}">{{ ($meal->how_much_ate * $meal->food->calories ) / $meal->food->minimun_value }}</td>
                                                         <td>
-                                                            <button type='button' class='btn btn-secondary' onclick="deleteMeal({{ $meal->user_id .", ". $meal->food_id .", ". $meal->meal_type_id .", '". $meal->date . "'" }})">Eliminar</button>
+                                                            <div class='btn-group' role='group' aria-label='Basic example'>
+                                                                <button type='button' class='btn btn-secondary' onclick="add_meal('{{ $meal_type->description }}', {{ $meal->id }})">Editar</button>
+                                                                <button type='button' class='btn btn-secondary' onclick="if(confirm('Desea eliminar esta comida?')){ deleteMeal({{ $meal->id }}); }">Eliminar</button>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                     @endif

@@ -29,8 +29,12 @@ class Meal extends Model
         return $this->belongsTo(MealType::class, 'meal_type_id');
     }
 
-    public static function create($request){
-        $meal = new Meal;
+    public static function create($request, $id = 0){
+        if ($id){
+            $meal = Meal::find($id);
+        }else{
+            $meal = new Meal;
+        }
         $meal->user_id = $request->user_id;
         $meal->food_id = $request->food_id;
         $meal->meal_type_id = $request->meal_type_id;
@@ -38,7 +42,7 @@ class Meal extends Model
         $meal->how_much_ate = $request->how_much_ate;
         $meal->save();
 
-        return ['food' => $meal->food->name, 'how_much_ate' => $meal->how_much_ate, 'calories' => ($meal->how_much_ate * $meal->food->calories ) / $meal->food->minimun_value];
+        return ['id' => $meal->id, 'food' => $meal->food->name, 'how_much_ate' => $meal->how_much_ate, 'calories' => ($meal->how_much_ate * $meal->food->calories ) / $meal->food->minimun_value];
     }
 
     public static function getByDate($date){

@@ -76,9 +76,9 @@ class MealController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreMealRequest $request, $id)
     {
-        //
+        return response()->json(Meal::create($request, $id));
     }
 
     /**
@@ -89,6 +89,7 @@ class MealController extends Controller
      */
     public function destroy($id)
     {
-        return response()->json(Meal::del($id));
+        Meal::where('id', $id)->delete();
+        return response()->json(['done' => 1]);
     }
 }
