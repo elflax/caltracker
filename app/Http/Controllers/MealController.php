@@ -19,11 +19,20 @@ class MealController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $request->validate([
+            'date' => 'date_format:m-d-Y'
+        ]);
+        if($request->has('date')){
+            $date = $request->date;
+        }else{
+            $date = date('m-d-Y');
+        }
         return view('meal.index')
                 ->with('meal_types', MealType::all())
-                ->with('meals', Meal::getByDate(date('Y-m-d')));
+                ->with('date', $date)
+                ->with('meals', Meal::getByDate($date));
     }
 
     /**

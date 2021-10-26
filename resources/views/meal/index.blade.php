@@ -5,7 +5,13 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Registro de calorias') . " " . date('d/m/Y') }}</div>
+                    <div class="card-header">{{ __('Registro de calorias') . " "}}
+                        <a href="{{ route('meal.index') . '?date=' . \Carbon\Carbon::createFromFormat('m-d-Y', $date)->addDay(-1)->format('m-d-Y') }}"><b><</b></a>
+                        {{ \Carbon\Carbon::createFromFormat('m-d-Y', $date)->format('m/d/Y') }}
+                        @if( \Carbon\Carbon::createFromFormat('m-d-Y', $date)->lt(\Carbon\Carbon::now()->addDay(-1)) )
+                        <a href="{{ route('meal.index') . '?date=' . \Carbon\Carbon::createFromFormat('m-d-Y', $date)->addDay(1)->format('m-d-Y') }}"><b>></b></a>
+                        @endif
+                    </div>
 
                     <div class="card-body text-center">
                         <h3>Bienvenido {{ Auth::user()? Auth::user()->name:"" }}</h3>

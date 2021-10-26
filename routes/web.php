@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->prefix('meal')->group(function () {
-    Route::get('/', [MealController::class, 'index']);
+    Route::get('/', [MealController::class, 'index'])->name('meal.index');
     Route::post('/', [MealController::class, 'store']);
     Route::put('/{id}', [MealController::class, 'update']);
     Route::delete('/{id}', [MealController::class, 'destroy']);

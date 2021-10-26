@@ -46,7 +46,7 @@ class Meal extends Model
     }
 
     public static function getByDate($date){
-        return Meal::whereDate('date', $date)->get();
+        return Meal::whereDate('date', \Carbon\Carbon::createFromFormat('m-d-Y', $date)->format('Y-m-d'))->get();
     }
 
     public static function del($id){
