@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Registro de calorias') . " "}}
                         <a href="{{ route('meal.index') . '?date=' . \Carbon\Carbon::createFromFormat('m-d-Y', $date)->addDay(-1)->format('m-d-Y') }}"><b><</b></a>
-                        {{ \Carbon\Carbon::createFromFormat('m-d-Y', $date)->format('m/d/Y') }}
+                        {{ \Carbon\Carbon::createFromFormat('m-d-Y', $date)->format('d/m/Y') }}
                         @if( \Carbon\Carbon::createFromFormat('m-d-Y', $date)->lt(\Carbon\Carbon::now()->addDay(-1)) )
                         <a href="{{ route('meal.index') . '?date=' . \Carbon\Carbon::createFromFormat('m-d-Y', $date)->addDay(1)->format('m-d-Y') }}"><b>></b></a>
                         @endif
