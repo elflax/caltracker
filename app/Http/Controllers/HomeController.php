@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $id = Auth::user()->id;
+        $user = User::find($id);
+        if(is_null($user->weight))
+        {
+        return view('US6\weightregister');
+        }
         return view('home');
     }
 }

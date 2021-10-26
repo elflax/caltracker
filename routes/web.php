@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('hasWeight');
+
+Route::view("/weightregister","/us6/weightregister")->name('weightregister');
+
+Route::match(['get', 'post'], '/weightsave', 'App\Http\Controllers\US6\WeightController@save')->name('weightsave');
