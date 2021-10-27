@@ -88,7 +88,7 @@ function cancelMeal(elem, meal_type, meal_id = 0){
             "</td>" +
             "<td>" +
                 "<div class='btn-group' role='group' aria-label='Basic example'>" +
-                    "<button type='button' class='btn btn-secondary' onclick=\"add_meal('"+meal_type+"', "+meal_id+")\">Editar</button>" +
+                    "<button type='button' class='btn btn-secondary edit-"+meal_type+"' onclick=\"add_meal('"+meal_type+"', "+meal_id+")\">Editar</button>" +
                     "<button type='button' class='btn btn-secondary' onclick='if(confirm(\"Desea eliminar esta comida?\")){ deleteMeal("+meal_id+"); }'>Eliminar</button>" +
                 "</div>" +
             "</td>";
@@ -129,7 +129,7 @@ function submitMeal(elem, meal_type, meal_id = 0){
                             "</td>" +
                             "<td>" +
                                 "<div class='btn-group' role='group' aria-label='Basic example'>" +
-                                    "<button type='button' class='btn btn-secondary' onclick=\"add_meal('"+meal_type+"', "+((meal_id)? meal_id:result.id)+")\">Editar</button>" +
+                                    "<button type='button' class='btn btn-secondary edit-"+meal_type+"' onclick=\"add_meal('"+meal_type+"', "+((meal_id)? meal_id:result.id)+")\">Editar</button>" +
                                     "<button type='button' class='btn btn-secondary' onclick='if(confirm(\"Desea eliminar esta comida?\")){ deleteMeal("+result.id+"); }'>Eliminar</button>" +
                                 "</div>" +
                             "</td>";
