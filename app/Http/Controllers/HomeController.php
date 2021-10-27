@@ -25,12 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $id = Auth::user()->id;
-        $user = User::find($id);
-        if(is_null($user->weight))
+        if(!auth()->user()->is_set_up_complete())
         {
-        return view('US6\weightregister');
+            return redirect()->route('weights.index');
         }
+
         return view('home');
     }
 }
