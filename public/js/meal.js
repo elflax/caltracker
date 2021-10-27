@@ -90,7 +90,7 @@ function cancelMeal(elem, meal_type, meal_id = 0){
     }else{
         $(elem).parent().parent().parent().remove();
     }
-    $('#add-Desayuno').attr('disabled', false);
+    $('#add-'+meal_type).attr('disabled', false);
 }
 
 function submitMeal(elem, meal_type, meal_id = 0){
