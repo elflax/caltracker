@@ -30,7 +30,7 @@ function add_meal(meal_type, meal_id = 0 ){
                             "<td>" +
                                 "<div class='btn-group' role='group' aria-label='Basic example'>" +
                                     "<button type='button' onclick=\"submitMeal(this, '" + meal_type + "', "+meal_id+")\" class='btn btn-success'>Agregar</button>" +
-                                    "<button type='button' class='btn btn-danger'>Cancelar</button>" +
+                                    "<button type='button' class='btn btn-danger' onclick='cancelMeal(this, \""+meal_type+"\", "+meal_id+")'>Cancelar</button>" +
                                 "</div>" +
                             "</td>" +
                         ((meal_id)? "":"</tr>");
@@ -64,6 +64,35 @@ function calculateCalories(meal_type){
 
 }
 
+function cancelMeal(elem, meal_type, meal_id = 0){
+    if(meal_id){
+        let food = $('#select-' + meal_type+" option:selected").text();
+        let food_id = $('#select-' + meal_type).val();
+        let how_much_ate = parseInt($('#input-' + meal_type).val());
+        let calories = parseInt($('#cal-' + meal_type).text());
+        let html =
+            "<td id='food_"+meal_id+"' data-food_id='"+food_id+"'>" +
+                food +
+            "</td>" +
+            "<td id='how_much_ate_"+meal_id+"'>" +
+                how_much_ate +
+            "</td>" +
+            "<td id='calories_"+meal_id+"'>" +
+                calories +
+            "</td>" +
+            "<td>" +
+                "<div class='btn-group' role='group' aria-label='Basic example'>" +
+                    "<button type='button' class='btn btn-secondary' onclick=\"add_meal('"+meal_type+"', "+meal_id+")\">Editar</button>" +
+                    "<button type='button' class='btn btn-secondary' onclick='if(confirm(\"Desea eliminar esta comida?\")){ deleteMeal("+meal_id+"); }'>Eliminar</button>" +
+                "</div>" +
+            "</td>";
+        $('#meal_'+meal_id).html(html);
+    }else{
+        $(elem).parent().parent().parent().remove();
+    }
+    $('#add-Desayuno').attr('disabled', false);
+}
+
 function submitMeal(elem, meal_type, meal_id = 0){
     if(meal_id){
         var url = "http://127.0.0.1:8000/meal/" + meal_id;
@@ -91,7 +120,7 @@ function submitMeal(elem, meal_type, meal_id = 0){
                             "</td>" +
                             "<td>" +
                                 "<div class='btn-group' role='group' aria-label='Basic example'>" +
-                                    "<button type='button' class='btn btn-secondary' onclick=\"add_meal('"+meal_type+"', "+meal_id+")\">Editar</button>" +
+                                    "<button type='button' class='btn btn-secondary' onclick=\"add_meal('"+meal_type+"', "+((meal_id)? meal_id:result.id)+")\">Editar</button>" +
                                     "<button type='button' class='btn btn-secondary' onclick='if(confirm(\"Desea eliminar esta comida?\")){ deleteMeal("+result.id+"); }'>Eliminar</button>" +
                                 "</div>" +
                             "</td>";

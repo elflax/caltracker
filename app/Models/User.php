@@ -53,4 +53,9 @@ class User extends Authenticatable
     public function rutines(){
         return $this->hasMany(Rutine::class);
     }
+
+    public function is_set_up_complete()
+    {
+        return !is_null($this->weight) && !is_null($this->height) && !is_null($this->ideal_weight);
+    }
 }

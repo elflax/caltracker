@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if(!auth()->user()->is_set_up_complete())
+        {
+            return redirect()->route('weights.index');
+        }
+
         return view('home');
     }
 }
