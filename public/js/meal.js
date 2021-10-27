@@ -1,5 +1,8 @@
 function add_meal(meal_type, meal_id = 0 ){
     $('#add-'+meal_type).attr('disabled', true);
+    $('.edit-' + meal_type).each(function (index, elem){
+        $(elem).attr('disabled', true);
+    });
     $.ajax({
         url: "http://127.0.0.1:8000/food/0",
         type: "GET",
@@ -40,6 +43,9 @@ function add_meal(meal_type, meal_id = 0 ){
                 $('#table-' + meal_type + ' tbody').append(html);
             }
             $('#add-'+meal_type).attr('disabled', true);
+            $('.edit-' + meal_type).each(function (index, elem){
+                $(elem).attr('disabled', true);
+            });
             console.log(food);
             if(meal_id){
                 $('#select-' + meal_type).val(food);
@@ -91,6 +97,9 @@ function cancelMeal(elem, meal_type, meal_id = 0){
         $(elem).parent().parent().parent().remove();
     }
     $('#add-'+meal_type).attr('disabled', false);
+    $('.edit-' + meal_type).each(function (index, elem){
+        $(elem).attr('disabled', false);
+    });
 }
 
 function submitMeal(elem, meal_type, meal_id = 0){
@@ -130,6 +139,9 @@ function submitMeal(elem, meal_type, meal_id = 0){
                 $(elem).parent().parent().parent().html(html);
             }
             $('#add-' + meal_type).attr('disabled', false);
+            $('.edit-' + meal_type).each(function (index, elem){
+                $(elem).attr('disabled', false);
+            });
         },
         error: function (jqXHR, exception) {
             var msg = '';
@@ -150,6 +162,9 @@ function submitMeal(elem, meal_type, meal_id = 0){
             }
             alert(msg);
             $('#add-' + meal_type).attr('disabled', false);
+            $('.edit-' + meal_type).each(function (index, elem){
+                $(elem).attr('disabled', false);
+            });
         },
     });
 }

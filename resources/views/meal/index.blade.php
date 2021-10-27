@@ -54,7 +54,7 @@
                                                         <td id="calories_{{ $meal->id }}">{{ ($meal->how_much_ate * $meal->food->calories ) / $meal->food->minimun_value }}</td>
                                                         <td>
                                                             <div class='btn-group' role='group' aria-label='Basic example'>
-                                                                <button type='button' class='btn btn-secondary' onclick="add_meal('{{ $meal_type->description }}', {{ $meal->id }})">Editar</button>
+                                                                <button type='button' class='btn btn-secondary edit-{{ $meal->food->name }}' onclick="add_meal('{{ $meal_type->description }}', {{ $meal->id }})">Editar</button>
                                                                 <button type='button' class='btn btn-secondary' onclick="if(confirm('Desea eliminar esta comida?')){ deleteMeal({{ $meal->id }}); }">Eliminar</button>
                                                             </div>
                                                         </td>
