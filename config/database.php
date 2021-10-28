@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Str;
 
-$url = parse_url("mysql://b669d65be93e57:b035a894@us-cdbr-east-04.cleardb.com/heroku_d4ca4127a8a4f02?reconnect=true"));
+$url = parse_url("mysql://b669d65be93e57:b035a894@us-cdbr-east-04.cleardb.com/heroku_d4ca4127a8a4f02?reconnect=true");
 
 $host = $url["host"];
 $username = $url["user"];
