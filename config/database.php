@@ -2,13 +2,6 @@
 
 use Illuminate\Support\Str;
 
-$url = parse_url("mysql://b669d65be93e57:b035a894@us-cdbr-east-04.cleardb.com/heroku_d4ca4127a8a4f02?reconnect=true");
-
-$host = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"], 1);
-
 return [
 
     /*
@@ -53,10 +46,11 @@ return [
         ],
         'mysql' => array(
             'driver'    => 'mysql',
-            'host'      => $host,
-            'database'  => $database,
-            'username'  => $username,
-            'password'  => $password,
+            'host'      => 'us-cdbr-east-04.cleardb.com',
+            'database'  => 'heroku_d4ca4127a8a4f02'	,
+            'username'  => 'b669d65be93e57',
+            'password'  => 'b035a894',
+            'port' => '3306',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
