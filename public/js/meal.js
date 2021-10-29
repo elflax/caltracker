@@ -4,7 +4,7 @@ function add_meal(meal_type, meal_id = 0 ){
         $(elem).attr('disabled', true);
     });
     $.ajax({
-        url: "http://127.0.0.1:8000/food/0",
+        url: document.location.origin + "/food/0",
         type: "GET",
         dataType: "json",
         async: false,
@@ -46,7 +46,7 @@ function add_meal(meal_type, meal_id = 0 ){
             $('.edit-' + meal_type).each(function (index, elem){
                 $(elem).attr('disabled', true);
             });
-            console.log(food);
+
             if(meal_id){
                 $('#select-' + meal_type).val(food);
                 $('#input-' + meal_type).val(how_much_ate);
@@ -104,10 +104,10 @@ function cancelMeal(elem, meal_type, meal_id = 0){
 
 function submitMeal(elem, meal_type, meal_id = 0){
     if(meal_id){
-        var url = "http://127.0.0.1:8000/meal/" + meal_id;
+        var url = document.location.origin + "/meal/" + meal_id;
         var method = "PUT";
     }else{
-        var url = "http://127.0.0.1:8000/meal/";
+        var url = document.location.origin + "/meal/";
         var method = "POST";
     }
     $.ajax({
@@ -118,13 +118,13 @@ function submitMeal(elem, meal_type, meal_id = 0){
         async: false,
         success: function(result){
             let html =
-                            "<td>" +
+                            "<td id='food_"+result.id+"' data-food_id='" + result.food_id + "'>" +
                                 result.food +
                             "</td>" +
-                            "<td>" +
+                            "<td id='how_much_ate_"+result.id+"'>" +
                                 result.how_much_ate +
                             "</td>" +
-                            "<td>" +
+                            "<td id='calories_"+result.id+"'>" +
                                 result.calories +
                             "</td>" +
                             "<td>" +
@@ -133,11 +133,12 @@ function submitMeal(elem, meal_type, meal_id = 0){
                                     "<button type='button' class='btn btn-secondary' onclick='if(confirm(\"Desea eliminar esta comida?\")){ deleteMeal("+result.id+"); }'>Eliminar</button>" +
                                 "</div>" +
                             "</td>";
-            if(meal_id){
-                $('#meal_' + meal_id).html(html);
-            }else{
-                $(elem).parent().parent().parent().html(html);
+
+            if(!meal_id){
+                $(elem).parent().parent().parent().attr('id', 'meal_' + result.id);
+                meal_id = result.id;
             }
+            $('#meal_' + meal_id).html(html);
             $('#add-' + meal_type).attr('disabled', false);
             $('.edit-' + meal_type).each(function (index, elem){
                 $(elem).attr('disabled', false);
@@ -171,7 +172,7 @@ function submitMeal(elem, meal_type, meal_id = 0){
 
 function deleteMeal(meal_id){
     $.ajax({
-        url: "http://127.0.0.1:8000/meal/"+meal_id,
+        url: document.location.origin + "/meal/"+meal_id,
         type: "DELETE",
         dataType: "json",
         data: {
