@@ -107,7 +107,7 @@ function submitMeal(elem, meal_type, meal_id = 0){
         var url = document.location.origin + "/meal/" + meal_id;
         var method = "PUT";
     }else{
-        var url = document.location.origin + "/meal/";
+        var url = document.location.origin + "/meal";
         var method = "POST";
     }
     $.ajax({
