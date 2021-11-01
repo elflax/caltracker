@@ -42,7 +42,7 @@ class Meal extends Model
         $meal->how_much_ate = $request->how_much_ate;
         $meal->save();
 
-        return ['id' => $meal->id, 'food' => $meal->food->name, 'how_much_ate' => $meal->how_much_ate, 'calories' => ($meal->how_much_ate * $meal->food->calories ) / $meal->food->minimun_value];
+        return ['id' => $meal->id, 'food_id' => $meal->food->id, 'food' => $meal->food->name, 'how_much_ate' => $meal->how_much_ate, 'calories' => ($meal->how_much_ate * $meal->food->calories ) / $meal->food->minimun_value];
     }
 
     public static function getByDate($date){
