@@ -1,3 +1,14 @@
+function validate_message(responseText){
+    let response = JSON.parse(responseText);
+    let objs = [];
+
+    for (let prop in  response.errors) {
+        objs.push(`${prop} - ${response.errors[prop]}`);
+    }
+
+    return response.message + ": " + objs.join(', ');
+}
+
 function add_meal(meal_type, meal_id = 0 ){
     $('#add-'+meal_type).attr('disabled', true);
     $('.edit-' + meal_type).each(function (index, elem){
@@ -61,6 +72,13 @@ function calculateCalories(meal_type){
     var unit_of_measure = $('#select-'+meal_type+' option:selected').attr('data-unit_of_measure');
     var minimun_value = parseInt($('#select-'+meal_type+' option:selected').attr('data-minimun_value'));
     var rations = parseInt($('#input-'+meal_type).val());
+    if( !isNaN(rations) && rations <= 0){
+        alert('El numero de raciones debe ser mayor a 0');
+        return;
+    }
+    if (isNaN(rations)){
+        return;
+    }
     var total_cals = (calories * (isNaN(rations)? 0:rations) ) / minimun_value;
 
     $('#input-'+meal_type).attr('placeholder', 'Numero de raciones (' + unit_of_measure + ')');
@@ -159,7 +177,8 @@ function submitMeal(elem, meal_type, meal_id = 0){
             } else if (exception === 'abort') {
                 msg = 'Ajax request aborted.';
             } else {
-                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+
+                msg = 'Uncaught Error.\n' + validate_message(jqXHR.responseText);
             }
             alert(msg);
             $('#add-' + meal_type).attr('disabled', false);
