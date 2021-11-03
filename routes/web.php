@@ -27,8 +27,6 @@ Route::middleware('auth')->prefix('meal')->group(function () {
 });
 
 
-Route::middleware('auth')->resource('food', FoodController::class)->names([
-    'get' => 'food.build'
-]);
+Route::middleware('auth')->resource('food', FoodController::class);
 
 Route::resource('weights', App\Http\Controllers\WeightController::class)->only(['index', 'store']);

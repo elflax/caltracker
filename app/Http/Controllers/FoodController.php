@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\FoodRequest;
 use App\Models\Food;
 
+use DeprecationTests\Foo;
 use Illuminate\Http\Request;
 
 class FoodController extends Controller
@@ -14,7 +16,7 @@ class FoodController extends Controller
      */
     public function index()
     {
-        //
+        return view('food.index')->with('foods', Food::all());
     }
 
     /**
@@ -24,7 +26,7 @@ class FoodController extends Controller
      */
     public function create()
     {
-
+        return view('food.create');
     }
 
     /**
@@ -33,9 +35,10 @@ class FoodController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FoodRequest $request)
     {
-        //
+        Food::create($request->all());
+        return redirect(route('food.index'))->with('result', 'Comida creada exitosamente');
     }
 
     /**
@@ -57,7 +60,7 @@ class FoodController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('food.create')->with('food', Food::find($id));
     }
 
     /**
@@ -67,9 +70,16 @@ class FoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FoodRequest $request, $id)
     {
-        //
+        $data = $request->only([
+            "name",
+            "calories",
+            "unit_of_measure",
+            "minimun_value",
+        ]);
+        Food::where('id', $id)->update($data);
+        return redirect(route('food.index'))->with('result', 'Comida actualizada exitosamente');
     }
 
     /**
@@ -80,6 +90,7 @@ class FoodController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Food::find($id)->delete();
+        return redirect(route('food.index'))->with('result', 'Comida eliminada exitosamente');
     }
 }
