@@ -43,7 +43,7 @@ class FoodRequest extends FormRequest
             'unit_of_measure.size' => 'La unidad de medida deben tener un tamaño de 2 letras',
             'minimun_value.required' => 'El valor minimo es requerido',
             'minimun_value.integer' => 'El valor minimo debe ser un numero entero',
-            'minimun_value.min' => 'El valor minimo debe ser mayor a 1',
+            'minimun_value.min' => 'El valor minimo debe ser mayor a 0',
         ];
     }
 }
