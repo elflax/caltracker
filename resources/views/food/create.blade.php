@@ -71,9 +71,12 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Guardar') }}
-                                    </button>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="submit" class="btn btn-primary">
+                                            {{ __('Guardar') }}
+                                        </button>
+                                        <a href="{{ route('food.index') }}" class="btn btn-secondary">Regresar</a>
+                                    </div>
                                 </div>
                             </div>
                         </form>

@@ -36,11 +36,13 @@
                                 <td>{{ $food->minimun_value }}</td>
                                 <td>{{ $food->unit_of_measure }}</td>
                                 <td>
-                                    <a href="{{ route('food.edit', ['food' => $food->id ]) }}" class="btn btn-secondary d-inline">Editar</a>
                                     <form action="{{ route('food.destroy', ['food' => $food->id ]) }}" method="POST" class="d-inline">
                                         @method('DELETE')
                                         @csrf
-                                        <button type="button" onclick="if(confirm('Desea eliminar esta comida?')) { $(this).parent().submit(); }" class="btn btn-danger">Eliminar</button>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="{{ route('food.edit', ['food' => $food->id ]) }}" class="btn btn-secondary d-inline">Editar</a>
+                                            <button type="button" onclick="if(confirm('Desea eliminar esta comida?')) { $(this).parent().parent().submit(); }" class="btn btn-danger">Eliminar</button>
+                                        </div>
                                     </form>
                                 </td>
                             </tr>
