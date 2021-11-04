@@ -56,7 +56,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="minimun_value" class="col-md-4 col-form-label text-md-right">{{ __('Valor Minimo') }}</label>
+                                <label for="minimun_value" class="col-md-4 col-form-label text-md-right">{{ __('Valor Mínimo') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="minimun_value" type="number" min="1" class="form-control @error('minimun_value') is-invalid @enderror" name="minimun_value" value="{{ (isset($food))? $food->minimun_value:old('minimun_value') }}" placeholder="Solo se permiten numeros enteros" required autocomplete="minimun_value" autofocus>
