@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Meal extends Model
 {
@@ -46,7 +47,9 @@ class Meal extends Model
     }
 
     public static function getByDate($date){
-        return Meal::whereDate('date', \Carbon\Carbon::createFromFormat('m-d-Y', $date)->format('Y-m-d'))->get();
+        return Meal::where('user_id', Auth::id())
+                    ->whereDate('date', \Carbon\Carbon::createFromFormat('m-d-Y', $date)
+                    ->format('Y-m-d'))->get();
     }
 
     public static function del($id){
