@@ -86,4 +86,3 @@
 @section('scripts')
     <script type="application/javascript" src="{{asset('js/meal.js')}}"></script>
 @endsection
-echo json_encode(1); 
