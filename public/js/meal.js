@@ -3,10 +3,10 @@ function validate_message(responseText){
     let objs = [];
 
     for (let prop in  response.errors) {
-        objs.push(`${prop} - ${response.errors[prop]}`);
+        objs.push(`${response.errors[prop]}`);
     }
 
-    return response.message + ": " + objs.join(', ');
+    return objs.join(', ');
 }
 
 function add_meal(meal_type, meal_id = 0 ){
@@ -178,7 +178,7 @@ function submitMeal(elem, meal_type, meal_id = 0){
                 msg = 'Ajax request aborted.';
             } else {
 
-                msg = 'Uncaught Error.\n' + validate_message(jqXHR.responseText);
+                msg = validate_message(jqXHR.responseText);
             }
             alert(msg);
             $('#add-' + meal_type).attr('disabled', false);

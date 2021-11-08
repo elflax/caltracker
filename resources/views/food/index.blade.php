@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="card-body text-center">
-                        <table class="table">
+                        <table class="table" id="table-food">
                             <thead>
                             <tr>
                                 <th scope="col">Nombre</th>
@@ -58,6 +58,16 @@
 
 @section('scripts')
     <script type="application/javascript" src="{{asset('js/meal.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $.noConflict();
+            $('#table-food').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json"
+                }
+            });
+        } );
+    </script>
 @endsection
 
 @section('styles')
