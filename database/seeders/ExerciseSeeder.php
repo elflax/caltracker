@@ -25,14 +25,14 @@ class ExerciseSeeder extends Seeder
         Exercise::create([
             'name' => 'Trotar',
             'calories_waste' => 300,
-            'unit_of_measure' => 'minutos',
+            'unit_of_measure' => 'min',
             'minimun_value' => 30,
         ]);
 
         Exercise::create([
             'name' => 'Correr',
             'calories_waste' => 400,
-            'unit_of_measure' => 'minutos',
+            'unit_of_measure' => 'min',
             'minimun_value' => 30,
         ]);
     }

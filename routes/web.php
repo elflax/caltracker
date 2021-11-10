@@ -32,3 +32,9 @@ Route::middleware('auth')->resource('food', FoodController::class)->names([
 ]);
 
 Route::resource('weights', App\Http\Controllers\WeightController::class)->only(['index', 'store']);
+
+Route::resource('rutine', App\Http\Controllers\RutineController::class)->except(['create', 'edit', 'show']);
+
+Route::resource('exercise', App\Http\Controllers\ExerciseController::class)->names([
+    'get' => 'exercise.build'
+]);
