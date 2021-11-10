@@ -1,0 +1,11 @@
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+  margin-left: 5px;
+}
+
+.left-asterisk::before {
+  content:"*";
+  color:red;
+  margin-right: 5px;
+}

@@ -71,3 +71,11 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
+@endsection
