@@ -117,7 +117,8 @@ class HomeController extends Controller
         ->with('databarexists', $databarexists)
         ->with('caloriesxday', $caloriesxday)
         ->with('foodRanking',$foodRanking)
-        ->with('totalCaloriesWeek', $totalCaloriesWeek);
+        ->with('totalCaloriesWeek', $totalCaloriesWeek)
+        ->with('date',$date);
     }
 
     

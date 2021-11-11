@@ -32,6 +32,7 @@ var config2={
                   }]
               },
               options: {
+                maintainAspectRatio: false,
                   scales: {
                       y: {
                           beginAtZero: true
@@ -40,5 +41,5 @@ var config2={
               }
           };
 
-
+window.myChartBar = new Chart(document.getElementById("myChartBar"), config2);
 </script>

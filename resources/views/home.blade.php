@@ -1,10 +1,11 @@
 @extends('layouts.app')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
 <script>
 
 window.onload = function() {
-window.myChartCake = new Chart(document.getElementById("myChartCake"), config);
-window.myChartBar = new Chart(document.getElementById("myChartBar"), config2);
+
+
 };
     </script>
 @section('content')
@@ -55,7 +56,6 @@ window.myChartBar = new Chart(document.getElementById("myChartBar"), config2);
             <div class="card">
                 <div class="card-header">{{ __('Estos son los 5 platos que mas consumiste esta semana') }}</div>
                 <div class="card-body">
-                    {{ $totalCaloriesWeek }}
                 @if($totalCaloriesWeek!=0)   
                 @include('statistics.top5')
                 @else
