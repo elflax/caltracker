@@ -19,4 +19,11 @@ class Exercise extends Model
     public function rutines(){
         return $this->hasMany(Rutine::class);
     }
+
+    public static function getById($id){
+        //Cero return all registers
+        if($id)
+            return Exercise::find($id);
+        return Exercise::all();
+    }
 }

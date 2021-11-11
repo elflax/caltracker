@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Rutine extends Model
 {
@@ -22,5 +23,12 @@ class Rutine extends Model
 
     public function exercise(){
         return $this->belongsTo(Exercise::class, 'exercise_id');
+    }
+
+    public function scopeByDate($query, $date)
+    {
+        return $query->where('user_id', Auth::id())
+                    ->whereDate('date', \Carbon\Carbon::createFromFormat('m-d-Y', $date)
+                    ->format('Y-m-d'));
     }
 }

@@ -27,8 +27,12 @@ Route::middleware('auth')->prefix('meal')->group(function () {
 });
 
 
-Route::middleware('auth')->resource('food', FoodController::class)->names([
-    'get' => 'food.build'
-]);
+Route::middleware('auth')->resource('food', FoodController::class);
 
 Route::resource('weights', App\Http\Controllers\WeightController::class)->only(['index', 'store']);
+
+Route::resource('rutine', App\Http\Controllers\RutineController::class)->except(['create', 'edit', 'show']);
+
+Route::resource('exercise', App\Http\Controllers\ExerciseController::class)->names([
+    'get' => 'exercise.build'
+]);

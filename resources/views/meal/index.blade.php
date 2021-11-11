@@ -19,8 +19,11 @@
                         <p>En esta seccion puedes ingresar los platos que has consumido durante las comidas</p>
                         <ul>
                             <li>Puede ingresar un plato de nuestra lista con platos precargados</li>
-                            <li>En caso que encuentre una opcion adecuada puedes crear un plato nuevo dando <a href="#">click aquí</a></li>
+                            <li>En caso que encuentre una opcion adecuada puedes crear un plato nuevo dando <a href="{{ route('food.create') }}">click aquí</a></li>
                         </ul>
+                        <a href="{{ route('food.index') }}" class="btn btn-success">Ver Comidas</a>
+                        <br>
+                        <br>
                         <div id="accordion">
                             @foreach($meal_types as $meal_type)
                             <div class="card">
@@ -69,7 +72,7 @@
                                         </form>
                                         <div class='btn-group' role='group' aria-label='Basic example'>
                                             <button class="btn btn-success" id="add-{{ $meal_type->description }}" onclick="add_meal('{{ $meal_type->description }}')">Agrega plato</button>
-                                            <button class="btn btn-secondary">Crear plato</button>
+                                            <a class="btn btn-secondary" href="{{ route('food.create') }}">Crear plato</a>
                                         </div>
                                     </div>
                                 </div>
@@ -86,4 +89,3 @@
 @section('scripts')
     <script type="application/javascript" src="{{asset('js/meal.js')}}"></script>
 @endsection
-echo json_encode(1); 

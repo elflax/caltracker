@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/required-forms.css') }}" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     @yield('styles')
 </head>
@@ -55,7 +57,16 @@
                             @endif
                         @else
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('food.index') }}">{{ __('Ver comidas') }}</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('meal.index') }}">{{ __('Registrar calorías') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('exercise.index') }}">{{ __('Ver ejercicios') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('rutine.index') }}" class="nav-link">Rutina</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('weights.index') }}">Sobre tu peso</a>
@@ -86,6 +97,9 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
     @yield('scripts')
 </body>
 </html>

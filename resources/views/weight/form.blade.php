@@ -7,9 +7,7 @@
             placeholder="Peso actual">
 
         @error('weight')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
+        <div class="alert alert-danger">{{ $message }}</div>
         @enderror
       </div>
   </div>
@@ -21,9 +19,7 @@
             placeholder="Altura">
 
         @error('height')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
+        <div class="alert alert-danger">{{ $message }}</div>
         @enderror
       </div>
   </div>
@@ -35,33 +31,41 @@
             placeholder="Peso ideal">
 
         @error('ideal_weight')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
+        <div class="alert alert-danger">{{ $message }}</div>
         @enderror
       </div>
   </div>
   <div>
       <label> Tu indice actual de masa corporal es: </label>
 
-      <label name="imc" id="imc" for="imc">-</label>
+      <label name="imc" id="imc" for="imc" >-</label>
   </div>
   <button type="submit" class="btn btn-success mb-2">Guardar</button>
 </form>
 
 <script>
   $(document).ready(function() {
+    var height = $("#height").val();
+             var weight = $("#weight").val();
+    if (weight > 0 && height > 0) {
+                  $("#imc").text((weight / Math.pow(height/100, 2)).toFixed(2));
+              }
       var imc = 0;
-      var alt =
           $("#height").blur(function(event) {
-              var height = $("#height").val();
+            var height = $("#height").val();
+             var weight = $("#weight").val();
+             if (weight > 0 && height > 0) {
+                  $("#imc").text((weight / Math.pow(height/100, 2)).toFixed(2));
+              }
+            });
+
+            $("#weight").blur(function(event) {
+               var height = $("#height").val();
               var weight = $("#weight").val();
               if (weight > 0 && height > 0) {
                   $("#imc").text((weight / Math.pow(height/100, 2)).toFixed(2));
-              } else {
-                  $("#imc").text('No se puede calcular');
               }
-
-          });
+            });
+              
   });
 </script>
