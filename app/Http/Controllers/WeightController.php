@@ -26,19 +26,23 @@ class WeightController extends Controller
 
     public function store(Request $request)
     {
-        
-        
+
+
         $validation_rules = 'required|integer|min:0';
-        
-        $this->validate($request, [
-            'weight' => $validation_rules,
-            'height' => $validation_rules,
-            'ideal_weight' => $validation_rules
-        ], [
-            'weight.required' => 'Digite un valor',
-            'height.required'  => 'Digite un valor',
-            'ideal_weight.required' => 'Digite un valor'
-          ]);
+
+        $this->validate(
+            $request,
+            [
+                'weight' => $validation_rules,
+                'height' => $validation_rules,
+                'ideal_weight' => $validation_rules
+            ],
+            [
+                'weight.required' => 'Digite un valor',
+                'height.required'  => 'Digite un valor',
+                'ideal_weight.required' => 'Digite un valor'
+            ]
+        );
 
         $data = $request->only(
             [

@@ -1,13 +1,4 @@
 @extends('layouts.app')
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
-<script>
-
-window.onload = function() {
-
-
-};
-    </script>
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -56,7 +47,7 @@ window.onload = function() {
             <div class="card">
                 <div class="card-header">{{ __('Estos son los 5 platos que mas consumiste esta semana') }}</div>
                 <div class="card-body">
-                @if($totalCaloriesWeek!=0)   
+                @if($totalCaloriesWeek!=0)
                 @include('statistics.top5')
                 @else
                 No hay suficientes datos para mostrar tus estadisticas de consumo.
