@@ -57,6 +57,9 @@
                             @endif
                         @else
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('food.index') }}">{{ __('Ver comidas') }}</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('meal.index') }}">{{ __('Registrar calorías') }}</a>
                             </li>
                             <li class="nav-item">
