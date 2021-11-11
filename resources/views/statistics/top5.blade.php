@@ -6,7 +6,7 @@
 .tftable tr:hover {background-color:#ffffff;}
 </style>
                 
-@if($totalCaloriesWeek!=0)
+@if($totalCaloriesWeek!=0 && count($foodRanking)>2)
 <table class="tftable" border="1">
 <tr><th>Plato</th><th>Calorias acumuladas</th><th>Porcentaje</th></tr>
 @foreach($foodRanking as $food)
