@@ -42,30 +42,3 @@
   </div>
   <button type="submit" class="btn btn-success mb-2">Guardar</button>
 </form>
-
-<script>
-  $(document).ready(function() {
-    var height = $("#height").val();
-             var weight = $("#weight").val();
-    if (weight > 0 && height > 0) {
-                  $("#imc").text((weight / Math.pow(height/100, 2)).toFixed(2));
-              }
-      var imc = 0;
-          $("#height").blur(function(event) {
-            var height = $("#height").val();
-             var weight = $("#weight").val();
-             if (weight > 0 && height > 0) {
-                  $("#imc").text((weight / Math.pow(height/100, 2)).toFixed(2));
-              }
-            });
-
-            $("#weight").blur(function(event) {
-               var height = $("#height").val();
-              var weight = $("#weight").val();
-              if (weight > 0 && height > 0) {
-                  $("#imc").text((weight / Math.pow(height/100, 2)).toFixed(2));
-              }
-            });
-              
-  });
-</script>
