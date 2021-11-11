@@ -33,6 +33,8 @@ return [
     |
     */
 
+    
+
     'connections' => [
 
         'sqlite' => [
@@ -42,27 +44,40 @@ return [
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
-
-        'mysql' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+        'mysql' => array(
+            'driver'    => 'mysql',
+            'host'      => 'us-cdbr-east-04.cleardb.com',
+            'database'  => 'heroku_d4ca4127a8a4f02'	,
+            'username'  => 'b669d65be93e57',
+            'password'  => 'b035a894',
+            'port' => '3306',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+        ),
+        'mysql_test' => [
+            'driver'      => 'mysql',
+            'host'        => env('DB_HOST', 'us-cdbr-east-04.cleardb.com'),
+            'port'        => env('DB_PORT', '3306'),
+            'database'    => env('DB_DATABASE_TEST', 'heroku_d4ca4127a8a4f02'),
+            'username'    => env('DB_USERNAME_TEST', 'b669d65be93e57'),
+            'password'    => env('DB_PASSWORD_TEST', 'b035a894'),
             'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
+            'charset'     => 'utf8mb4',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'prefix'      => '',
+            'strict'      => false,
+            'modes'       => [
+                'ONLY_FULL_GROUP_BY',
+                'STRICT_TRANS_TABLES',
+                'NO_ZERO_IN_DATE',
+                'NO_ZERO_DATE',
+                'ERROR_FOR_DIVISION_BY_ZERO',
+                'NO_AUTO_CREATE_USER',
+                'NO_ENGINE_SUBSTITUTION',
+            ],
             'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
         ],
-
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
