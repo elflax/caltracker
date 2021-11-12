@@ -33,6 +33,8 @@ class HomeController extends Controller
         {
             return redirect()->route('weights.index');
         }
+        date_default_timezone_set('UTC');
+        date_default_timezone_set("America/Mexico_City");
         $date = date('Y-m-d');
         $datacakeexists=0;
         $desayunos=DB::table('Food')
